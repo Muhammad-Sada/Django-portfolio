@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+    <h1>Projects</h1>
+    <p style="max-width: 600px; color:#9ca3af;">
+        A collection of projects I've worked on, showcasing my skills in 
+        Django, backend development, and problem-solving.
+    </p>
+</section>
+
+
+<section style="margin-top: 40px;">
+
+    {% for project in projects %}
+        <div class="card">
+
+            {% if project.image %}
+                <img src="{{ project.image.url }}" 
+                     alt="{{ project.title }}" 
+                     style="width:100%; border-radius:8px; margin-bottom:15px;">
+            {% endif %}
+
+            <h3>{{ project.title }}</h3>
+
+            <p style="color:#9ca3af;">
+                {{ project.description }}
+            </p>
+
+            {% if project.link %}
+                <a href="{{ project.link }}" class="btn" target="_blank">
+                    View Project
+                </a>
+            {% endif %}
+
+        </div>
+    {% empty %}
+        <p>No projects available yet.</p>
+    {% endfor %}
+
+</section>
+
+<!-- OPTIONAL BACK LINK -->
+<section style="margin-top: 50px;">
+    <a href="{% url 'home_page' %}" class="btn">← Back to Home</a>
+</section>
+
+{% endblock %}
